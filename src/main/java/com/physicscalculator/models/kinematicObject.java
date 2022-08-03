@@ -2,8 +2,12 @@ package com.physicscalculator.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class kinematicObject extends physicsObject{
+/**
+ * An physics object that can be used with kinematic equations and thus has the additional properties of 
+ * @author jtorr
+ *
+ */
+public class kinematicObject extends newtonianObject{
 	private List<Double> velocity = new ArrayList<>();
 	private List<Double> acceleration = new ArrayList<>();
 
