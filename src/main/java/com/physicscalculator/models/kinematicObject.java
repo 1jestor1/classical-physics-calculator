@@ -3,7 +3,7 @@ package com.physicscalculator.models;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * An physics object that can be used with kinematic equations and thus has the additional properties of 
+ * An physics object that can be used with kinematic equations and thus has the additional properties of: velocity and acceleration. 
  * @author jtorr
  *
  */
