@@ -1,32 +1,37 @@
 package com.physicscalculator.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RequestHelper {
+import com.physicscalculator.controllers.kinematicController;
+import com.physicscalculator.models.kinematicObject;
 
+public class RequestHelper {
+	
+	private static kinematicController knmtcCntrllr = new kinematicController();
+	
 	public static Object processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String resource = request.getRequestURI().replace("/physicscalculator/api", "");
-		switch(resource) {
+		String rsrc = request.getRequestURI();
+		String isltdRsrc = rsrc.replace("/physicscalculator/api", "");
+		PrintWriter wrtr = response.getWriter();
+		switch(isltdRsrc) {
+		case "/positionf":
 		
-		/*
-		 * To-Do:
-		 * + Calculate Final Position (ArrayList) (positionf) 
-		 * + Calculate Initial Position (ArrayList) (positioni)
-		 * + Calculate Final Velocity (ArrayList) (velocityf)
-		 * + Calculate Initial Velocity (ArrayList) (velocityi)
-		 */
-		
+			response.setContentType("text/html");
+			wrtr.write(knmtcCntrllr.positionFinalGet(request, response));
+			response.setStatus(202);
+			break;
 		default:
-			
+				
 			response.setStatus(404);
 			break;
 		}
-		return null;
 		
+		return null;
 	}
 	
 }

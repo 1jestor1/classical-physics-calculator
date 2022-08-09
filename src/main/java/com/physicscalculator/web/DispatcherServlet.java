@@ -19,5 +19,6 @@ public class DispatcherServlet extends HttpServlet{
 		 * Calculate Final Velocity (ArrayList)
 		 * Calculate Initial Velocity (ArrayList)
 		 */
+		RequestHelper.processGet(request, response);
 	}
 }
