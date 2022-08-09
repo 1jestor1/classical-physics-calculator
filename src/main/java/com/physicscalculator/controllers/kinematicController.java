@@ -1,7 +1,6 @@
 package com.physicscalculator.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -19,15 +18,16 @@ public class kinematicController {
 	public ObjectMapper objctMppr;
 	
 	public String positionFinalGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		objctMppr = new ObjectMapper();
 		knmtcClcltr = new kinematicCalculatorImpl();
+		kinematicObject newKnmtcObjct = kinematicObjectInput(request, response);
+		List<Double> positionF = knmtcClcltr.MvmntToPos(newKnmtcObjct.getAcceleration(), newKnmtcObjct.getVelocity(), newKnmtcObjct.getPosition(), newKnmtcObjct.getTime());
+		return positionF.toString();
+	}
+	
+	public kinematicObject kinematicObjectInput(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		objctMppr = new ObjectMapper();
 		String jsonBdy = new String(request.getInputStream().readAllBytes());
 		kinematicObject newKnmtcObjct = objctMppr.readValue(jsonBdy, kinematicObject.class);
-		List<Double> positionI =  newKnmtcObjct.getPosition();
-		List<Double> velocityI = newKnmtcObjct.getVelocity();
-		List<Double> accelerationI = newKnmtcObjct.getAcceleration();
-		double TimeF = newKnmtcObjct.getTime(); 
-		List<Double> positionF = knmtcClcltr.MvmntToPos(accelerationI, velocityI, positionI, TimeF);
-		return positionF.toString();
+		return newKnmtcObjct;
 	}
 }

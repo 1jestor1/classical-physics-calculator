@@ -21,7 +21,7 @@ public class RequestHelper {
 		switch(isltdRsrc) {
 		case "/positionf":
 		
-			response.setContentType("text/html");
+			response.setContentType("application/json");
 			wrtr.write(knmtcCntrllr.positionFinalGet(request, response));
 			response.setStatus(202);
 			break;
