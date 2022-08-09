@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.physicscalculator.controllers.kinematicController;
-import com.physicscalculator.models.kinematicObject;
 
 public class RequestHelper {
 	

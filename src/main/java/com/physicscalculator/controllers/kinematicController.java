@@ -16,14 +16,32 @@ public class kinematicController {
 	
 	private kinematicCalculator knmtcClcltr;
 	public ObjectMapper objctMppr;
-	
+	/**
+	 * Takes a json input of time, position, velocity, and acceleration from the request body to calculate the final position.
+	 * Outputs the final position into response body. 
+	 * @param request is the origin of the json.
+	 * @param response is the endpoint of the Final Position.
+	 * @return Final Position as a String formatted as a json.
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public String positionFinalGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		objctMppr = new ObjectMapper();
 		knmtcClcltr = new kinematicCalculatorImpl();
 		kinematicObject newKnmtcObjct = kinematicObjectInput(request, response);
 		List<Double> positionF = knmtcClcltr.MvmntToPos(newKnmtcObjct.getAcceleration(), newKnmtcObjct.getVelocity(), newKnmtcObjct.getPosition(), newKnmtcObjct.getTime());
-		return positionF.toString();
+		String json = objctMppr.writeValueAsString(positionF);
+		return json;
 	}
-	
+	/**
+	 * Converts a json input of mass, time, position, velocity, and acceleration into a kinematicObject that contains those
+	 * properties.
+	 * @param request is the origin of the json.
+	 * @param response
+	 * @return kinematicObject
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public kinematicObject kinematicObjectInput(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		objctMppr = new ObjectMapper();
 		String jsonBdy = new String(request.getInputStream().readAllBytes());
