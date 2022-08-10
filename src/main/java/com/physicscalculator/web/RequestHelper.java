@@ -24,6 +24,14 @@ public class RequestHelper {
 			wrtr.write(knmtcCntrllr.positionFinalGet(request, response));
 			response.setStatus(202);
 			break;
+			
+		case "/velocityf":
+			
+			response.setContentType("application/json");
+			wrtr.write(knmtcCntrllr.velocityFinalGet(request, response));
+			response.setStatus(202);
+			break;
+			
 		default:
 				
 			response.setStatus(404);
